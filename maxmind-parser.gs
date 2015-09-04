@@ -2,7 +2,7 @@ var sheet = SpreadsheetApp.getActiveSheet();
 var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
 
 function getEmails() {
-  var label = GmailApp.getUserLabelByName("Maxmind");
+  var label = GmailApp.getUserLabelByName("Maxmind Review");
   var threads = label.getThreads();
   var row = 2;
   for (var i = 0; i < threads.length; i++) {
@@ -31,7 +31,7 @@ function getEmails() {
       tmp = content.match(/txnID:\s*([A-Za-z0-9-_]+)(\r?\n)/);
       var txnid = (tmp && tmp[1]) ? tmp[1].trim() : 'No TxnID';
    //reason
-      tmp = content.match(/Reason:\s*([A-Za-z0-9- ,]+)(\r?\n)/);
+      tmp = content.match(/Reason:\s*([A-Za-z0-9-() ,.]+)(\r?\n)/);
       var reason = (tmp && tmp[1]) ? tmp[1].trim() : 'No reason';
       
       sheet.appendRow([ipaddress, maxmindid, domain, billingloc, date, txnid, reason]);
